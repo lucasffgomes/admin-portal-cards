@@ -38,13 +38,14 @@ O banco de dados já inicializa pré-populado. Utilize a conta abaixo para acess
 - **Usuário:** `admin`
 - **Senha:** `admin123`
 
-## 🧠 Decisões de Arquitetura e UX
+## 🧠 Decisões de Produto (UX e Arquitetura)
 
-1. **Backend com PHP Puro (PSR-4 e MVC):** Apesar da restrição de frameworks, a estrutura foi desenhada usando o padrão PSR-4 com o Autoloader do Composer. O código é segmentado em Models, Controllers e rotas isoladas, resultando em uma API limpa, altamente escalável e madura.
-2. **Respostas da API Padronizadas:** O uso de um `ResponseTrait` garante que todos os endpoints retornem um JSON previsível (`{ success, message, data }`).
-3. **Sessão Segura (Mitigação XSS/CSRF):** Em vez do clássico JWT no localStorage, o acesso é mantido via sessão nativa do PHP, usando as diretivas de segurança `HttpOnly` e `SameSite: Strict`.
-4. **Armazenamento Otimizado de Imagens:** O banco salva apenas a URL da imagem (armazenada fisicamente na pasta `storage/`), evitando o gargalo de performance causado por Base64 longo no banco de dados.
-5. **Dados 100% Dinâmicos:** Filtros e abas de categorias conversam diretamente com o backend (via API), eliminando hardcodes e permitindo a adição flexível de novos jogos futuramente.
+1. **Interface Minimalista e Intuitiva (UX):** Sabendo que os usuários terão diferentes níveis de familiaridade com tecnologia, optei por um design em *Glassmorphism* focado na clareza. Usei textos descritivos explícitos nos botões (ao invés de apenas ícones) para reduzir a curva de aprendizado e manter a interface extremamente acessível e óbvia.
+2. **Backend com PHP Puro (PSR-4 e MVC):** Apesar da restrição de frameworks, a estrutura foi desenhada usando o padrão PSR-4 com o Autoloader do Composer. O código é segmentado em Models, Controllers e rotas isoladas, resultando em uma API limpa, altamente escalável e madura.
+3. **Respostas da API Padronizadas:** O uso de um `ResponseTrait` garante que todos os endpoints retornem um JSON previsível (`{ success, message, data }`).
+4. **Sessão Segura (Mitigação XSS/CSRF):** Em vez do clássico JWT no localStorage, o acesso é mantido via sessão nativa do PHP, usando as diretivas de segurança `HttpOnly` e `SameSite: Strict`.
+5. **Armazenamento Otimizado de Imagens:** O banco salva apenas a URL da imagem (armazenada fisicamente na pasta `storage/`), evitando o gargalo de performance causado por Base64 longo no banco de dados.
+6. **Filtros 100% Dinâmicos:** Filtros e abas de categorias conversam diretamente com o backend (via API), eliminando hardcodes e permitindo a adição flexível de novos jogos futuramente, melhorando a vida de quem vai operar a plataforma.
 
 ## 🖼 Imagens de Amostra
 
