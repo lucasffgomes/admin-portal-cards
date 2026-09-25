@@ -91,6 +91,9 @@
   border-radius: 10px;
   overflow: hidden;
   transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .card-item:hover {
@@ -125,6 +128,9 @@
 
 .card-content {
   padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .card-title {
@@ -177,7 +183,7 @@
 .card-actions {
   display: flex;
   gap: 0.5rem;
-  margin-top: 1rem;
+  margin-top: auto;
   border-top: 1px solid var(--border-color);
   padding-top: 1rem;
 }
