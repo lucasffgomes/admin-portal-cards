@@ -1,0 +1,25 @@
+:root {
+  /* Colors - Standard Light Theme */
+  --bg-color: #f4f6f8;
+  --bg-card: #ffffff;
+  --text-main: #333333;
+  --text-muted: #6c757d;
+
+  --primary: #0d6efd;
+  --primary-hover: #0b5ed7;
+  --danger: #dc3545;
+  --danger-hover: #bb2d3b;
+  --success: #198754;
+
+  --border-color: #dee2e6;
+  --input-bg: #ffffff;
+
+  /* Typography */
+  --font-family: "Lexend", system-ui, -apple-system, sans-serif;
+
+  /* Utilities */
+  --border-radius: 4px;
+  --transition: all 0.2s ease-in-out;
+  --glass-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --glass-blur: none;
+}

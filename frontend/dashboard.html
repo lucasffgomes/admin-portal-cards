@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - TCG Admin</title>
+    <link rel="stylesheet" href="assets/css/variables.css" />
+    <link rel="stylesheet" href="assets/css/global.css" />
+    <link rel="stylesheet" href="assets/css/layout.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <header class="dashboard-header">
+        <h1 style="margin: 0">TCG Admin</h1>
+
+        <div class="header-actions">
+          <button id="newCardBtn" class="btn btn-primary">+ Nova Carta</button>
+
+          <div class="view-toggles">
+            <button id="viewGridBtn" class="btn btn-secondary active">
+              Grid
+            </button>
+            <button id="viewListBtn" class="btn btn-secondary">Lista</button>
+          </div>
+
+          <div class="header-divider"></div>
+
+          <button id="logoutBtn" class="btn btn-secondary btn-danger-outline">
+            Sair
+          </button>
+        </div>
+      </header>
+
+      <!-- Filtros -->
+      <div
+        class="filters-container"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 2rem;
+          flex-wrap: wrap;
+          gap: 1rem;
+        "
+      >
+        <div
+          class="game-tabs"
+          id="gameFilterTabs"
+          style="display: flex; gap: 0.5rem; overflow-x: auto"
+        >
+          <button class="btn btn-secondary active" data-game="all">
+            Todos os Jogos
+          </button>
+        </div>
+
+        <div
+          id="editionFilterContainer"
+          class="input-group"
+          style="
+            display: none;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0;
+          "
+        >
+          <label for="editionFilter" style="margin: 0; white-space: nowrap"
+            >Edição:</label
+          >
+          <select
+            id="editionFilter"
+            style="
+              width: auto;
+              min-width: 200px;
+              padding: 0.5rem 2.5rem 0.5rem 1rem;
+            "
+          >
+            <option value="all">Todas as Edições</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="cardsGrid" class="cards-grid">
+        <!-- Cartões serão injetados aqui via JS -->
+      </div>
+
+      <footer class="dashboard-footer">
+        <div>&copy; <span id="currentYear"></span> TCG Admin</div>
+        <div>
+          Desenvolvido por
+          <a
+            href="https://lucasffgomes.com.br"
+            target="_blank"
+            style="
+              color: var(--primary);
+              font-weight: 600;
+              text-decoration: none;
+            "
+            >lucasffgomes</a
+          >
+        </div>
+        <script>
+          document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
+        </script>
+      </footer>
+    </div>
+
+    <!-- Modal Form -->
+    <div class="modal-overlay" id="cardModal">
+      <div class="modal-content">
+        <button class="modal-close" id="closeModalBtn">&times;</button>
+
+        <div class="modal-grid">
+          <!-- Esquerda: Preview da Carta -->
+          <div class="modal-image-pane">
+            <div class="image-preview-container" id="imagePreviewContainer">
+              <span style="color: var(--text-muted); font-size: 0.9rem"
+                >Clique para Upload</span
+              >
+              <div class="image-overlay">📷 Alterar Imagem</div>
+            </div>
+          </div>
+
+          <!-- Direita: Formulário Scrollável -->
+          <div class="modal-form-pane">
+            <h2
+              id="modalTitle"
+              style="
+                margin-bottom: 2rem;
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 1rem;
+              "
+            >
+              Nova Carta
+            </h2>
+
+            <form id="cardForm">
+              <input type="hidden" id="cardId" name="id" />
+              <input
+                type="file"
+                id="image"
+                name="image"
+                accept="image/*"
+                style="display: none"
+              />
+
+              <div class="input-group">
+                <label for="name_en">Nome (Inglês)*</label>
+                <input
+                  type="text"
+                  id="name_en"
+                  name="name_en"
+                  placeholder="Ex: Dark Magician"
+                  required
+                />
+              </div>
+
+              <div class="input-group">
+                <label for="name_pt">Nome (Português)</label>
+                <input
+                  type="text"
+                  id="name_pt"
+                  name="name_pt"
+                  placeholder="Ex: Mago Negro (Opcional)"
+                />
+              </div>
+
+              <div class="input-group">
+                <label for="game">Jogo*</label>
+                <select id="game" name="game" required>
+                  <option value="">Selecione o Jogo...</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label for="edition_id">Edição*</label>
+                <select id="edition_id" name="edition_id" required disabled>
+                  <option value="">Selecione a Edição...</option>
+                </select>
+              </div>
+
+              <div class="input-group" style="margin-bottom: 2rem">
+                <label for="rarity">Raridade</label>
+                <input
+                  type="text"
+                  id="rarity"
+                  name="rarity"
+                  placeholder="Ex: Mythic Rare"
+                />
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary btn-block"
+                id="saveCardBtn"
+                style="position: sticky; bottom: 0"
+              >
+                Salvar Carta
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="assets/js/app.js?v=2"></script>
+  </body>
+</html>
