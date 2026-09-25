@@ -1,43 +1,57 @@
 # Portal Administrativo - Gestão de Cartas
 
-Este projeto é um Portal Administrativo para a gestão de cartas (Magic: The Gathering, Pokémon e Yu-Gi-Oh!), desenvolvido como teste técnico para a vaga de Fullstack Frontend.
+Este repositório contém o código de um Portal Administrativo voltado para a gestão de cartas (TCG), construído como parte de um desafio técnico Fullstack Frontend.
+
+A aplicação é totalmente responsiva, utiliza dados dinâmicos diretamente do backend e traz uma interface moderna (Glassmorphism), pensada para usuários com diferentes níveis de familiaridade tecnológica.
 
 ## 🚀 Como Inicializar o Projeto
 
-O projeto utiliza **Docker** para garantir que o ambiente seja padronizado e fácil de rodar. O backend foi construído em PHP Puro e o banco de dados é o MySQL.
+A aplicação é completamente containerizada via **Docker**, garantindo que o ambiente suba de primeira, sem a necessidade de instalar PHP, MySQL ou Apache localmente.
 
 ### Pré-requisitos
-
-- [Docker](https://www.docker.com/) e [Docker Compose](https://docs.docker.com/compose/) instalados na sua máquina.
+- [Docker](https://www.docker.com/) e [Docker Compose](https://docs.docker.com/compose/) instalados.
 
 ### Passo a Passo
-
-1. Abra o terminal na raiz do projeto (onde está localizado o arquivo `docker-compose.yml`).
-2. Execute o comando abaixo para subir os containers em segundo plano:
+1. Abra o terminal na raiz do projeto.
+2. Suba os containers da aplicação:
    ```bash
    docker-compose up -d
    ```
-3. Aguarde alguns segundos para que o banco de dados MySQL inicialize e crie as tabelas automaticamente através do script de seed.
-4. Acesse o portal pelo navegador no endereço:
-   👉 **http://localhost:8080**
+3. Aguarde cerca de 15 segundos para que o MySQL inicie e as tabelas sejam criadas pelo seed inicial.
+4. Acesse a aplicação no seu navegador: **[http://localhost:8080](http://localhost:8080)**
 
-## 🔐 Credenciais de Acesso (Teste)
+## 🔐 Credenciais de Acesso
 
-O banco de dados já sobe pré-populado com um usuário administrador padrão para testes.
+O banco de dados já inicializa pré-populado. Utilize a conta abaixo para acessar o dashboard:
 
 - **Usuário:** `admin`
 - **Senha:** `admin123`
 
 ## 🧠 Decisões de Arquitetura e UX
 
-1. **Arquitetura Backend (PSR-4 e Modularização):** Apesar da restrição do uso de frameworks no desafio, decidi implementar o padrão PSR-4 utilizando o Autoloader do Composer. Aliado a uma separação modular de rotas e padrão MVC (Models e Controllers), isso garante que o código PHP puro seja altamente maduro e limpo, sem o clássico problema de múltiplos `require_once` espalhados.
-2. **Padronização de Responses da API (Traits):** Foi criado um `ResponseTrait` no backend para garantir que qualquer requisição (com sucesso ou erro) devolva os dados no mesmo formato JSON padronizado (`{ success, message, data }`). Isso evita quebras e facilita muito a construção do frontend Vanilla que consome a API.
-3. **Autenticação via Sessão Segura vs JWT:** Optei por usar Sessões Nativas do PHP configuradas com flags de segurança (`HttpOnly` e `SameSite: Strict`) em vez de JWT armazenado no `localStorage`. Essa escolha blinda a aplicação contra ataques XSS e CSRF, além de permitir a invalidação imediata do acesso no momento do logout.
-4. **Armazenamento de Imagens e Segurança:** Em vez de salvar as imagens em formato Base64 diretamente no banco de dados (o que deixaria o banco extremamente lento e pesado), criei uma rotina de upload de arquivos para a pasta local `storage`. O banco armazena apenas a string do caminho (`image_url`). Além disso, implementei a validação de extensão e limite máximo de **2MB** no Controller, bloqueando uploads abusivos ou de arquivos executáveis disfarçados.
+1. **Backend com PHP Puro (PSR-4 e MVC):** Apesar da restrição de frameworks, a estrutura foi desenhada usando o padrão PSR-4 com o Autoloader do Composer. O código é segmentado em Models, Controllers e rotas isoladas, resultando em uma API limpa, altamente escalável e madura.
+2. **Respostas da API Padronizadas:** O uso de um `ResponseTrait` garante que todos os endpoints retornem um JSON previsível (`{ success, message, data }`).
+3. **Sessão Segura (Mitigação XSS/CSRF):** Em vez do clássico JWT no localStorage, o acesso é mantido via sessão nativa do PHP, usando as diretivas de segurança `HttpOnly` e `SameSite: Strict`.
+4. **Armazenamento Otimizado de Imagens:** O banco salva apenas a URL da imagem (armazenada fisicamente na pasta `storage/`), evitando o gargalo de performance causado por Base64 longo no banco de dados. 
+5. **Dados 100% Dinâmicos:** Filtros e abas de categorias conversam diretamente com o backend (via API), eliminando hardcodes e permitindo a adição flexível de novos jogos futuramente.
 
-## 🖼 Imagens de Amostra (Testes)
+## 🖼 Imagens de Amostra
 
-Para facilitar os testes, foi criada uma pasta `sample_images/` na raiz do projeto. Ela já contém a árvore de diretórios exata separada por jogos e edições (ex: `sample_images/magic/dom/`). Você pode colocar imagens locais nessa pasta para usá-las facilmente durante o preenchimento de cadastros e validação da interface.
+Na raiz do projeto há uma pasta `sample_images/` contendo mockups organizados por categoria. Você pode utilizá-los para testar o formulário de cadastro de cartas sem precisar procurar imagens na internet.
 
-Dicas
-docker-compose down -v; docker-compose up -d
+## ⚡ Comandos Úteis (Dicas)
+
+Aqui estão alguns comandos rápidos do Docker para gerenciar a aplicação:
+
+- **Derrubar tudo e limpar os dados (Reset total):**
+  ```bash
+  docker-compose down -v
+  ```
+- **Resetar e Subir novamente (Fresh Start):**
+  ```bash
+  docker-compose down -v && docker-compose up -d
+  ```
+- **Ver os logs da aplicação em tempo real:**
+  ```bash
+  docker-compose logs -f
+  ```
