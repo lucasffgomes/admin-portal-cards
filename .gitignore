@@ -1,0 +1,15 @@
+# Vendor Folder
+/api/vendor/
+
+# Environment Variables
+/api/.env
+
+# Uploads
+/api/storage/uploads/*
+!/api/storage/uploads/.gitkeep
+!/api/storage/uploads/cards/
+/api/storage/uploads/cards/*
+!/api/storage/uploads/cards/.gitkeep
+
+# Database
+/api/database/*.sqlite

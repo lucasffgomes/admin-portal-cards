@@ -1,0 +1,9 @@
+{
+    "name": "admin/portal-cards",
+    "description": "API em PHP usando PSR-4",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
