@@ -2,7 +2,7 @@
 
 Este repositório contém o código de um Portal Administrativo voltado para a gestão de cartas (TCG), construído como parte de um desafio técnico Fullstack Frontend.
 
-A aplicação é totalmente responsiva, utiliza dados dinâmicos diretamente do backend e traz uma interface moderna (Glassmorphism), pensada para usuários com diferentes níveis de familiaridade tecnológica.
+A aplicação é responsiva, utiliza dados dinâmicos diretamente do backend e traz uma interface moderna, pensada para usuários com diferentes níveis de familiaridade tecnológica.
 
 ### Preview da Aplicação
 
